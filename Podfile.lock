@@ -1,0 +1,22 @@
+PODS:
+  - JABLE (0.3.0)
+
+DEPENDENCIES:
+  - JABLE (from `https://github.com/JoeBakalor/JABLE.git`, branch `multperipheral`)
+
+EXTERNAL SOURCES:
+  JABLE:
+    :branch: multperipheral
+    :git: https://github.com/JoeBakalor/JABLE.git
+
+CHECKOUT OPTIONS:
+  JABLE:
+    :commit: 453cbe9dc7238c98dbb57ac1ece104b76745478f
+    :git: https://github.com/JoeBakalor/JABLE.git
+
+SPEC CHECKSUMS:
+  JABLE: 82b212c349ec80ae15c6f3d0e7c93085c5831e20
+
+PODFILE CHECKSUM: cc82149a623a93bb4d70d6886cb0bf68af9eceb1
+
+COCOAPODS: 1.5.3

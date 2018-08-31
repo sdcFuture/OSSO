@@ -1,0 +1,6 @@
+framework module Pods_OSSO {
+  umbrella header "Pods-OSSO-umbrella.h"
+
+  export *
+  module * { export * }
+}
