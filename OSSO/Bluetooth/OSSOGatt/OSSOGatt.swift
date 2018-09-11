@@ -22,8 +22,8 @@ struct TriAxis{
 }
 
 struct GpsCoordinate{
-    var latitude: Float
-    var longtitude: Float
+    var latitude: Double
+    var longtitude: Double
 }
 
 class OSSOGatt: NSObject, GattProfile{
@@ -51,7 +51,11 @@ class OSSOGatt: NSObject, GattProfile{
     var ossoIrTempValue: Bindable<Float> = Bindable(0)
     var ossoUvIndexValue: Bindable<Float> = Bindable(0)
     var ossoGpsValue: Bindable<GpsCoordinate> = Bindable(GpsCoordinate(latitude: 0, longtitude: 0))
-
+    var ossoHumidity: Bindable<Float> = Bindable(0)
+    
+    
+    var rawGps: Bindable<String> = Bindable("")
+    
     var gattProfile: JABLE_GATT.JABLE_GATTProfile!
     
     override init() {
@@ -229,8 +233,18 @@ extension OSSOGatt{
             
         case OSSO_HUMIDITY_CHARACTERISTIC_UUID:
 
+            
             let dataArray = getDataBytes(characteristic: characteristic)
-            print("New Humidity Data: \(dataArray)")
+            
+            let newHumidity: UInt16 = (UInt16(dataArray[1]) << 8) | UInt16(dataArray[0])
+            self.ossoHumidity.value = Float(newHumidity)/10
+            print("New Humidity value = \(ossoHumidity.value)")
+            
+            
+            //let dataArray = getDataBytes(characteristic: characteristic)
+            //let stringData = getHexString(characteristic: characteristic)
+            //self.ossoHumidity.value = stringData
+            //print("New Humidity Data: \(dataArray)")
 
         case OSSO_IR_TEMP_CHARACTERISTIC_UUID:
             
@@ -242,7 +256,30 @@ extension OSSOGatt{
             
             
         case OSSO_GPS_CHARACTERISTIC_UUID:
+            
             print("New GPS Data: \(value)")
+            let dataArray = getDataBytes(characteristic: characteristic)
+            self.rawGps.value = getHexString(characteristic: characteristic)
+            
+            let latitude: Int16 = (Int16(dataArray[11]) << 8) | Int16(dataArray[10])
+            let latFractional = Double((UInt32(dataArray[9]) << 24) | (UInt32(dataArray[8]) << 16) | (UInt32(dataArray[7]) << 8) | UInt32(dataArray[6]))/10000
+            var fullLat: Double
+            if latitude < 0{
+                fullLat = Double(latitude) - latFractional
+            } else {
+                fullLat = Double(latitude) + latFractional
+            }
+            
+            let longitude: Int16 = (Int16(dataArray[5]) << 8) | Int16(dataArray[4])
+            let lonFractional = Double( (UInt32(dataArray[3]) << 24) | (UInt32(dataArray[2]) << 16) | (UInt32(dataArray[1]) << 8) | UInt32(dataArray[0]))/10000
+            var fullLon: Double
+            if longitude < 0{
+                fullLon = Double(longitude) - lonFractional
+            } else {
+                fullLon = Double(longitude) + lonFractional
+            }
+            
+            self.ossoGpsValue.value = GpsCoordinate(latitude: fullLat, longtitude: fullLon)
             
         default:
         print("no match")
@@ -268,6 +305,24 @@ extension OSSOGatt{
         }
         //print("Raw Hex = \(hexValue)")
         return dataBytes
+    }
+    
+    //GET CHARACTERISTIC VALUE AND RETURN AS BYTE ARRAY
+    func getHexString(characteristic: CBCharacteristic) -> String{
+        
+        var data: Data? = characteristic.value as Data!
+        //data = characteristic.value as Data!
+        
+        var dataBytes = [UInt8](repeating: 0, count: data!.count)
+        (data! as NSData).getBytes(&dataBytes, length: data!.count)
+        
+        var hexValue = ""
+        for value in data!{
+            let hex = String(value, radix: 16)
+            hexValue = hexValue + "0x\(hex) "
+        }
+        //print("Raw Hex = \(hexValue)")
+        return hexValue
     }
     
 }

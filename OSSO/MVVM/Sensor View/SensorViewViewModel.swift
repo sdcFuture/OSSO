@@ -11,6 +11,7 @@ import Foundation
 
 class SensorViewViewModel: NSObject{
     
+    var testHumidity: Bindable<String> = Bindable("")
     var humidity: Bindable<Float?> = Bindable(nil)
     var temperature: Bindable<Float?> = Bindable(nil)
     var uvaUvb: Bindable<Float?> = Bindable(nil)
@@ -43,6 +44,10 @@ class SensorViewViewModel: NSObject{
         
         ossoGatt.ossoUvIndexValue.bind { [weak self] (newUvValue) in
             self?.uvaUvb.value = newUvValue
+        }
+        
+        ossoGatt.ossoHumidity.bind { [weak self ](newHumidity) in
+            self?.humidity.value = newHumidity
         }
         
     }

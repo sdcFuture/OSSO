@@ -36,7 +36,7 @@ class SensorViewViewController: UIViewController {
         
         viewModel.pressure.bind { (newPressure) in
             guard let pressure = newPressure else { return }
-            self.pressureLable.text = "Pressure = \(pressure)mbar"
+            self.uvaUvbLabel.text = "UV Index = \(pressure)"
         }
         
         viewModel.accelerometer.bind { (newAccelValue) in
@@ -44,6 +44,10 @@ class SensorViewViewController: UIViewController {
             self.accelLabel.text = "Accel (x: \(accel.x), y: \(accel.y), z: \(accel.z) mg)"
         }
         
+        viewModel.humidity.bind { (newValue) in
+            guard let humidity = newValue else { return }
+            self.humidityLabel.text = "Humidity: \(humidity) %"
+        }
         
     }
 }
