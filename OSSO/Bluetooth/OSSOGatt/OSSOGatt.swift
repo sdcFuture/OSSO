@@ -266,7 +266,8 @@ extension OSSOGatt{
             var fullLat: Double
             if latitude < 0{
                 fullLat = Double(latitude) - latFractional
-            } else {
+            }
+            else {
                 fullLat = Double(latitude) + latFractional
             }
             
@@ -275,7 +276,8 @@ extension OSSOGatt{
             var fullLon: Double
             if longitude < 0{
                 fullLon = Double(longitude) - lonFractional
-            } else {
+            }
+            else {
                 fullLon = Double(longitude) + lonFractional
             }
             
