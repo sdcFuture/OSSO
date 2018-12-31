@@ -73,9 +73,9 @@ public class JABLE_CentralController: NSObject
      Nothing
      
      - parameters:
-        - gapEventDelegate: The delegate to recieve GAP events
-        - gattEventDelegate: The delegate to recieve GATT events
-        - gattDiscoveryDelegate: The delegate to recieve GATT discovery process events
+     - gapEventDelegate: The delegate to recieve GAP events
+     - gattEventDelegate: The delegate to recieve GATT events
+     - gattDiscoveryDelegate: The delegate to recieve GATT discovery process events
      
      Additional details
      
@@ -97,6 +97,9 @@ public class JABLE_CentralController: NSObject
         _centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: true])
     }
     
+    public func getCentralManagerInstance() -> CBCentralManager{
+        return self._centralManager
+    }
     
 }
 
@@ -359,7 +362,7 @@ extension JABLE_CentralController
         //Check if service UUIDs have been specified
         guard let uuids = UUIDS else {
             
-            //print("JABLE_CentralController: START SCANNING")
+            print("JABLE_CentralController: START SCANNING")
             //Otherwise scan for all peripherals
             _centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerOptionShowPowerAlertKey: true, CBCentralManagerScanOptionAllowDuplicatesKey: false])
             return
@@ -415,12 +418,13 @@ extension JABLE_CentralController
         
         //Save reference to peripheral we are trying to connect
         _peripheralPendingConnection = peripheral
-        
+        if #available(iOS 10.0, *) {
         //Initiate connection to specificied peripheral
-        _centralManager.connect(peripheral, options: [CBConnectPeripheralOptionStartDelayKey: true,
-                                                      CBConnectPeripheralOptionNotifyOnConnectionKey: false,
-                                                      CBConnectPeripheralOptionNotifyOnDisconnectionKey: true,
-                                                      CBConnectPeripheralOptionNotifyOnNotificationKey: false])
+            _centralManager.connect(peripheral, options: nil)
+        }
+        else {
+            _centralManager.connect(peripheral, options: nil)
+        }
         //Set connection timeout timer
         _connectionTimeoutTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(_cancelConnectionAttempt), userInfo: nil, repeats: false)
     }
@@ -489,7 +493,7 @@ extension JABLE_CentralController: CBCentralManagerDelegate
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral)
     {
         //Initialize internal GATT Client instance
-
+        
         //_gattClientInstance = JABLE_GattClient(withPeripheral: peripheral, gattEventDelegate: _gattEventDelegate , gattDiscoveryDelegate: _gattDiscoveryDelegate)
         
         
@@ -536,7 +540,7 @@ extension JABLE_CentralController: CBCentralManagerDelegate
          */
         
         //Call GAP Event delegate method
-        //print("JABLE_CentralController: FOUND PERIPHERAL")
+        //print("JABLE_CentralController: FOUND PERIPHERAL \(advertisementData)")
         _gapEventDelegate.centralController(foundPeripheral: peripheral, with: advertisementData, rssi: RSSI.intValue)
     }
     
@@ -587,6 +591,7 @@ extension JABLE_CentralController: CBCentralManagerDelegate
         }
     }
 }
+
 
 
 

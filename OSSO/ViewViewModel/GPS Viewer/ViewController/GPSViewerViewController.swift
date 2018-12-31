@@ -13,18 +13,16 @@ class GPSViewerViewController: UIViewController {
     
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    @IBOutlet weak var latitudeValueLabel: UILabel!
-    @IBOutlet weak var longitudeValueLabel: UILabel!
-    
     @IBOutlet weak var gpsTextLog: UITextView!
+    
+    @IBOutlet weak var coordinateLabel: UILabel!
+    @IBOutlet weak var coordinateLabelContainer: UIView!
     
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
     var locationSet = false
     let regionRadius: CLLocationDistance = 25000
     let initialLocation = CLLocation(latitude: 40.8205638, longitude: -91.1407439)
-    
     
     var viewModel: GPSViewerViewModel!
     override func viewDidLoad() {
@@ -50,27 +48,38 @@ class GPSViewerViewController: UIViewController {
             locationManager.startUpdatingLocation()
         }
         
+        self.navigationController?.navigationBar.topItem?.title = "Location"
+        
         setupBindings()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        self.navigationController?.navigationBar.topItem?.title = "Location"
     }
     
     func setupBindings(){
         
         viewModel.cllocation.bind { (newLocation) in
             
-            guard let location = newLocation else { self.gpsTextLog.text = self.gpsTextLog.text + "bad location"; return }
-            let validLocation = CLLocation(latitude: (newLocation?.latitude)!, longitude: (newLocation?.longitude)!)
-            self.centerMapOnLocation(location: validLocation)
+            //guard let location = newLocation else { self.gpsTextLog.text = self.gpsTextLog.text + "bad location"; return }
+            if let newlat = newLocation?.latitude, let newLon = newLocation?.longitude{
+                let validLocation = CLLocation(latitude: newlat, longitude: newLon)
+                self.centerMapOnLocation(location: validLocation)
+            }
+            else {
+                let validLocation = CLLocation(latitude: 0, longitude: 0)
+                self.centerMapOnLocation(location: validLocation)
+            }
             
-            self.latitudeValueLabel.text = "\(Double(round(1000*(newLocation?.latitude)!)/1000))"
-            self.longitudeValueLabel.text = "\(Double(round(1000*(newLocation?.longitude)!)/1000))"
-            
-            print("New Location: \(newLocation)")
+        
+            //print("New Location: \(newLocation)")
         }
         
-        ossoGatt.rawGps.bind { (newGps) in
-            //self.gpsTextLog.text = "\n" + self.gpsTextLog.text + " RAW DATA: " + newGps
-        }
-        
+//        ossoGatt.rawGps.bind { (newGps) in
+//            //self.gpsTextLog.text = "\n" + self.gpsTextLog.text + " RAW DATA: " + newGps
+//        }
+//
     }
 
 
@@ -80,8 +89,20 @@ extension GPSViewerViewController{
     //FORCE CENTER MAP ON SPECIFIED LOCATION
     func centerMapOnLocation(location: CLLocation)
     {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        if location.coordinate.latitude == 0 && location.coordinate.longitude == 0{
+            coordinateLabel.text = "NO GPS"
+            return
+        }
+        
+        let coordinateRegion = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        let lon = Float(Int(location.coordinate.longitude * 1_000_000))/1_000_000
+        let lat = Float(Int(location.coordinate.latitude * 1_000_000))/1_000_000
+        
+        coordinateLabel.text = "Lon: \(lon), Lat: \(lat)"
+        //
+        coordinateLabel.textAlignment = .center
+        //coordinateLabel.sizeToFit()
     }
 }
 
@@ -96,11 +117,6 @@ extension GPSViewerViewController: CLLocationManagerDelegate
             currentLocation = locationManager.location
             centerMapOnLocation(location: currentLocation!)
             mapView.showsUserLocation = true
-            
-            if let lat = currentLocation?.coordinate.latitude, let lon = currentLocation?.coordinate.longitude{
-                self.latitudeValueLabel.text = "\(Double(round(1000*lat)/1000))"
-                self.longitudeValueLabel.text = "\(Double(round(1000*lon)/1000))"
-            }
         }
     }
     

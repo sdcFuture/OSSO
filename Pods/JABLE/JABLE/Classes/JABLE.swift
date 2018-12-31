@@ -89,7 +89,7 @@ public struct JABLECharacteristicProperties{
     
     public var extendedProperties = false//characteristic.properties.contains(.extendedProperties)
     public var notifyEncryptionRequired = false//characteristic.properties.contains(.notifyEncryptionRequired)
-
+    
 }
 
 let useImproved = true
@@ -97,11 +97,8 @@ let useImproved = true
 //MARK: Use JABLE when GATT structure is known
 open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
 {
-    
-    
     fileprivate var _connectedPeripheral: CBPeripheral?
     fileprivate var _connectedPeripherals: CBPeripheral?
-    
     fileprivate var _gattDiscoveryDelegate: GattDiscoveryDelegate?
     fileprivate var _jableCentralController: JABLE_CentralController!
     fileprivate var _jableGattProfile: JABLE_GATT?
@@ -114,7 +111,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
     fileprivate var _discoveringServicesFor: CBPeripheral?
     
     //var test: JABLE_GATT.JABLE_GATTProfile?
-
+    
     /**
      JABLE initialization
      
@@ -129,12 +126,12 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      
      - parameters:
      
-        - jableDelegate:      Delegate to receive all JABLE generated events
+     - jableDelegate:      Delegate to receive all JABLE generated events
      
-        - gattProfile:        Reference to the GATT profile that should be populated upon GATT discovery
+     - gattProfile:        Reference to the GATT profile that should be populated upon GATT discovery
      
-        - autoGattDiscovery:  Set to true to enable automatic service and characteristic discovery using
-                              the provide GATT profile
+     - autoGattDiscovery:  Set to true to enable automatic service and characteristic discovery using
+     the provide GATT profile
      
      JABLE provides central mode functionality inlcuding GAP and GAP event management, GATT a GATT event managment
      in a single library making BLE integration easier than managing and adopting multiple delegate protocols.  JABLE
@@ -142,7 +139,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      a peripheral GATT profile.  JABLE also provide automated GATT profile discovery
      
      */
-    public init(jableDelegate: JABLEDelegate?, gattProfile: inout JABLE_GATT.JABLE_GATTProfile?, autoGattDiscovery: Bool){
+    public init(jableDelegate: JABLEDelegate?, gattProfile: JABLE_GATT.JABLE_GATTProfile?, autoGattDiscovery: Bool){
         
         super.init()
         
@@ -154,13 +151,13 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
         //INIT CENTRAL CONTROLLER WITHOUT GATT STRUCTURE, WE WILL DO THIS OURSELVES
         _jableCentralController = JABLE_CentralController(gapEventDelegate: self, gattEventDelegate: self, gattDiscoveryDelegate: self)
         
-        
+        _autoDiscovery = autoGattDiscovery
         //Check if auto gatt discovery is enabled and gatt profile is not nil
-        guard autoGattDiscovery == true && gattProfile != nil else { return }
+        guard gattProfile != nil else { return }
         
         //Initialize JABLE_GATT
         _autoDiscovery = true
-        _jableGattProfile = JABLE_GATT(gattProfile: &gattProfile!, gattDiscoveryCompetionDelegate: self)//JABLE_GATT(gattProfile: &gattProfile!, gattDiscoveryCompetionDelegate: self)//, controller: self)
+        _jableGattProfile = JABLE_GATT(gattProfile: gattProfile!, gattDiscoveryCompetionDelegate: self)//JABLE_GATT(gattProfile: &gattProfile!, gattDiscoveryCompetionDelegate: self)//, controller: self)
         
         for includedService in (gattProfile?.services)!{
             _serviceDiscoveryUuids.append(includedService.uuid)
@@ -169,15 +166,19 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
         print("JABLE: Started")
     }
     
-    public func setNewGatt(gattProfile: inout JABLE_GATT.JABLE_GATTProfile?){
+    public func setNewGatt(gattProfile: JABLE_GATT.JABLE_GATTProfile?){
         
         _jableGattProfile = nil
-        _jableGattProfile = JABLE_GATT(gattProfile: &gattProfile!, gattDiscoveryCompetionDelegate: self)
-    
+        _jableGattProfile = JABLE_GATT(gattProfile: gattProfile!, gattDiscoveryCompetionDelegate: self)
+        
     }
     
     public func setJableDelegate(jableDelegate: JABLEDelegate){
         _jableDelegate = jableDelegate
+    }
+    
+    public func getCentralManagerInstance() -> CBCentralManager{
+        return _jableCentralController.getCentralManagerInstance()
     }
     
     /**
@@ -212,7 +213,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      nothing
      
      - parameters:
-        - filter: JABLEScanFilter defining what peripherals should be removed from scan results
+     - filter: JABLEScanFilter defining what peripherals should be removed from scan results
      
      Only one scan filter supported currently
      
@@ -256,7 +257,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      Nothing
      
      - parameters:
-        - uuids: service uuids that peripherals should contain. Specify nil to scan for all peripherals
+     - uuids: service uuids that peripherals should contain. Specify nil to scan for all peripherals
      
      Starts scanning for advertising BLE peripherals that include the specified service UUIDs in their
      advertisment data
@@ -286,7 +287,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
         _jableCentralController.stopScanning()
     }
     
-
+    
     /**
      Connect to specified peripheral using the timeout value provided
      
@@ -300,8 +301,8 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      Nothing
      
      - parameters:
-        - peripheral: the peripheral to connect to
-        - timeout: the timeout value in seconds
+     - peripheral: the peripheral to connect to
+     - timeout: the timeout value in seconds
      
      After timeout expires, the connection will be terminated if it is still pending
      */
@@ -310,16 +311,16 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
         print("JABLE: ATTEMPT CONNECTION")
         _jableCentralController.attemptConnection(toPeriperal: peripheral, timeout: timeout)
     }
-
+    
     /**/
-//    public func connect(toPeripheral peripheral: CBPeripheral, withTimeout timeout: Int, andDiscover gatt: inout GattProfile){
-//
-//        _jableGattProfile = JABLE_GATT(gattProfile: &gatt.gattProfile!, gattDiscoveryCompetionDelegate: self)
-//        _autoDiscovery = true
-//        print("JABLE: ATTEMPT CONNECTION")
-//        _jableCentralController.attemptConnection(toPeriperal: peripheral, timeout: timeout)
-//    }
-
+    //    public func connect(toPeripheral peripheral: CBPeripheral, withTimeout timeout: Int, andDiscover gatt: inout GattProfile){
+    //
+    //        _jableGattProfile = JABLE_GATT(gattProfile: &gatt.gattProfile!, gattDiscoveryCompetionDelegate: self)
+    //        _autoDiscovery = true
+    //        print("JABLE: ATTEMPT CONNECTION")
+    //        _jableCentralController.attemptConnection(toPeriperal: peripheral, timeout: timeout)
+    //    }
+    
     /**
      Disconnect from the currently connected peripheral
      
@@ -341,7 +342,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
         _jableCentralController.disconnect()
     }
     
-
+    
     /**
      Discover services on the connected BLE peripheral
      
@@ -516,9 +517,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      */
     public func enableNotifications(forCharacteristic characteristic: CBCharacteristic){
         
-        guard _connectedPeripheral != nil else { print("Peripheral Not Connected"); return /*ERROR*/ }
-        
-        print("Try to enable notifications for chara")
+        guard _connectedPeripheral != nil else { return /*ERROR*/ }
         _jableCentralController.enableNotifications(forCharacteristic: characteristic)
     }
     
@@ -535,7 +534,7 @@ open class JABLE: NSObject, GattDiscoveryCompletionDelegate, JABLE_API
      nothing
      
      - parameters:
-        - characteristic: The characteristic to disable notifications for
+     - characteristic: The characteristic to disable notifications for
      
      Additional details
      
@@ -575,7 +574,7 @@ extension JABLE: GapEventDelegate
     
     internal func centralController(foundPeripheral peripheral: CBPeripheral, with advertisementData: [String : Any], rssi RSSI: Int){
         
-        //print("JABLE: FOUND PERIPHERAL")
+        //print("JABLE: FOUND PERIPHERAL \(advertisementData)")
         var friendlyAdvertisementData = FriendlyAdvdertismentData()
         if true{
             
@@ -610,9 +609,19 @@ extension JABLE: GapEventDelegate
             friendlyAdvertisementData.transmitPowerLevel = txPowerLevel
             
             let localName             = advertisementData["kCBAdvDataLocalName"] as? String
-//            print("LOCAL NAME = \(String(describing: localName))")
+            //            print("LOCAL NAME = \(String(describing: localName))")
             
-            friendlyAdvertisementData.localName = localName
+            if let name = localName{
+                friendlyAdvertisementData.localName = name
+            }
+            else if let name = peripheral.name {
+                friendlyAdvertisementData.localName = name
+            }
+            else{
+                friendlyAdvertisementData.localName = "Unkonwn"
+            }
+            
+            //friendlyAdvertisementData.localName = localName
             friendlyAdvertisementData.rssi = RSSI
             friendlyAdvertisementData.timeStamp = Date()
         }
@@ -653,12 +662,17 @@ extension JABLE: GapEventDelegate
     
     internal func centralController(connectedTo peripheral: CBPeripheral){
         
+        print("Connected To \(peripheral)")
+        
         _connectedPeripheral = peripheral
         _jableDelegate.jable(connectedTo: peripheral)//jable(connectedTo peripheral: peripheral)
         if _autoDiscovery{
             _discoveringServicesFor = peripheral
             print("JABLE: START AUTO GATT DISCOVERY")
             _jableCentralController.discoverServices(with: nil, for: peripheral)//.startScanningForPeripherals(withServiceUUIDS: nil)
+        }
+        else {
+            print("Auto Discovery Disabled")
         }
     }
     
@@ -794,7 +808,7 @@ extension JABLE: GATTDiscoveryDelegate
             _jableCentralController.discoverCharacteristics(forService: unprocessedServices.first!, with: nil, for: peripheral)
             _unprocessedServices?.removeFirst()
         }
-
+        
     }
     
     //  Called by JABLE_GattClient
@@ -819,4 +833,5 @@ extension JABLE: GATTDiscoveryDelegate
 //        return formatter.string(from: self)
 //    }
 //}
+
 

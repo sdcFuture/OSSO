@@ -15,7 +15,14 @@ class GPSViewerViewModel: NSObject{
     
     override init() {
         super.init()
-        ossoGatt.ossoGpsValue.bind { [weak self] (newCoordinate) in
+        setupBindings()
+    }
+    
+    func setupBindings(){
+        print("Set ViewModelGPS Bindings")
+        ossoDeviceManager.connectedOSSO?.ossoGpsValue.bind{ [weak self] (newCoordinate) in
+            
+            //print("ViewModel updated location")
             self?.cllocation.value = CLLocationCoordinate2D(latitude: newCoordinate.latitude, longitude: newCoordinate.longtitude)
         }
     }

@@ -9,11 +9,17 @@
 /* Begin PBXBuildFile section */
 		E03D3601212AF1E100BBD42A /* OSSOGatt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03D3600212AF1E100BBD42A /* OSSOGatt.swift */; };
 		E03D3603212AF23B00BBD42A /* OSSOUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03D3602212AF23B00BBD42A /* OSSOUUIDs.swift */; };
+		E06CD5A921D3CD9000B96BD7 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06CD5A821D3CD9000B96BD7 /* DashboardViewModel.swift */; };
+		E0AFD4EE21C02DD6006B6553 /* OssoDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFD4ED21C02DD6006B6553 /* OssoDeviceTableViewCell.swift */; };
+		E0AFD4F121C064EB006B6553 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFD4F021C064EB006B6553 /* DashboardViewController.swift */; };
+		E0AFD4F321C06A1C006B6553 /* SensorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFD4F221C06A1C006B6553 /* SensorTableViewCell.swift */; };
+		E0B2E98C21C8057D007B5ADF /* OSSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2E98B21C8057D007B5ADF /* OSSO.swift */; };
 		E0B7B6F5212451B5007408A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B7B6F4212451B5007408A9 /* AppDelegate.swift */; };
 		E0B7B6F7212451B5007408A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B7B6F6212451B5007408A9 /* ViewController.swift */; };
 		E0B7B6FA212451B5007408A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0B7B6F8212451B5007408A9 /* Main.storyboard */; };
 		E0B7B6FC212451B6007408A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0B7B6FB212451B6007408A9 /* Assets.xcassets */; };
 		E0B7B6FF212451B6007408A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0B7B6FD212451B6007408A9 /* LaunchScreen.storyboard */; };
+		E0C635EC21C2EDBB00BE3BF0 /* MenuLevelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C635EB21C2EDBB00BE3BF0 /* MenuLevelController.swift */; };
 		E0EF2D2421385155006B17F4 /* OSSDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF2D2321385155006B17F4 /* OSSDeviceManager.swift */; };
 		E0EF2D2821385219006B17F4 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF2D2721385219006B17F4 /* Bindable.swift */; };
 		E0EF2D2D213860F0006B17F4 /* DeviceFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF2D2C213860F0006B17F4 /* DeviceFinderViewController.swift */; };
@@ -31,6 +37,11 @@
 		C86D7CADB2B517DDB1FB9392 /* Pods_OSSO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OSSO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03D3600212AF1E100BBD42A /* OSSOGatt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSSOGatt.swift; sourceTree = "<group>"; };
 		E03D3602212AF23B00BBD42A /* OSSOUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSSOUUIDs.swift; sourceTree = "<group>"; };
+		E06CD5A821D3CD9000B96BD7 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		E0AFD4ED21C02DD6006B6553 /* OssoDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OssoDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		E0AFD4F021C064EB006B6553 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		E0AFD4F221C06A1C006B6553 /* SensorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorTableViewCell.swift; sourceTree = "<group>"; };
+		E0B2E98B21C8057D007B5ADF /* OSSO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSSO.swift; sourceTree = "<group>"; };
 		E0B7B6F1212451B5007408A9 /* OSSO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSSO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0B7B6F4212451B5007408A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0B7B6F6212451B5007408A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +49,7 @@
 		E0B7B6FB212451B6007408A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0B7B6FE212451B6007408A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0B7B700212451B6007408A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0C635EB21C2EDBB00BE3BF0 /* MenuLevelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLevelController.swift; sourceTree = "<group>"; };
 		E0EF2D2321385155006B17F4 /* OSSDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSSDeviceManager.swift; sourceTree = "<group>"; };
 		E0EF2D2721385219006B17F4 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		E0EF2D2C213860F0006B17F4 /* DeviceFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFinderViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +89,116 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E06CD59421CBC31500B96BD7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E06CD59521CBC32900B96BD7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E0EF2D3321386195006B17F4 /* GPSViewerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E06CD59621CBC33000B96BD7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0EF2D35213861CF006B17F4 /* GPSViewerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E06CD59721CBC82B00B96BD7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0AFD4F221C06A1C006B6553 /* SensorTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E06CD59821CBC83800B96BD7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E0AFD4F021C064EB006B6553 /* DashboardViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E06CD59921CBC84300B96BD7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E06CD5A821D3CD9000B96BD7 /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E06CD5A221CFF80700B96BD7 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				E06CD5A321CFF82700B96BD7 /* OLD */,
+				E0B7B6F4212451B5007408A9 /* AppDelegate.swift */,
+				E0B7B6FB212451B6007408A9 /* Assets.xcassets */,
+				E0B7B6FD212451B6007408A9 /* LaunchScreen.storyboard */,
+				E0B7B6F6212451B5007408A9 /* ViewController.swift */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		E06CD5A321CFF82700B96BD7 /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				E0EF2D37213861D3006B17F4 /* Sensor View */,
+			);
+			path = OLD;
+			sourceTree = "<group>";
+		};
+		E06CD5A421CFF88A00B96BD7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0AFD4ED21C02DD6006B6553 /* OssoDeviceTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E06CD5A521CFF89700B96BD7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0EF2D3021386110006B17F4 /* DeviceFinderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E06CD5A621CFF89F00B96BD7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E0EF2D2C213860F0006B17F4 /* DeviceFinderViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E06CD5A721CFF8DB00B96BD7 /* OSSO */ = {
+			isa = PBXGroup;
+			children = (
+				E0B2E98B21C8057D007B5ADF /* OSSO.swift */,
+				E0EF2D2321385155006B17F4 /* OSSDeviceManager.swift */,
+			);
+			path = OSSO;
+			sourceTree = "<group>";
+		};
+		E0AFD4EF21C0641F006B6553 /* DashboardView */ = {
+			isa = PBXGroup;
+			children = (
+				E06CD59821CBC83800B96BD7 /* ViewController */,
+				E06CD59721CBC82B00B96BD7 /* Views */,
+				E06CD59921CBC84300B96BD7 /* ViewModel */,
+			);
+			path = DashboardView;
+			sourceTree = "<group>";
+		};
 		E0B7B6E8212451B5007408A9 = {
 			isa = PBXGroup;
 			children = (
@@ -100,31 +222,37 @@
 			children = (
 				E0EF2D26213851F8006B17F4 /* Utitlity */,
 				E0B7B6F8212451B5007408A9 /* Main.storyboard */,
-				E0EF2D2121384FFC006B17F4 /* MVVM */,
-				E0EF2D2221385004006B17F4 /* Bluetooth */,
-				E0B7B6F4212451B5007408A9 /* AppDelegate.swift */,
-				E0B7B6F6212451B5007408A9 /* ViewController.swift */,
-				E0B7B6FB212451B6007408A9 /* Assets.xcassets */,
-				E0B7B6FD212451B6007408A9 /* LaunchScreen.storyboard */,
 				E0B7B700212451B6007408A9 /* Info.plist */,
+				E0C635EB21C2EDBB00BE3BF0 /* MenuLevelController.swift */,
+				E0EF2D2121384FFC006B17F4 /* ViewViewModel */,
+				E0C2788421B56B9B00960970 /* Model */,
+				E06CD5A221CFF80700B96BD7 /* Supporting */,
 			);
 			path = OSSO;
 			sourceTree = "<group>";
 		};
-		E0EF2D2121384FFC006B17F4 /* MVVM */ = {
+		E0C2788421B56B9B00960970 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E0EF2D37213861D3006B17F4 /* Sensor View */,
+				E06CD5A721CFF8DB00B96BD7 /* OSSO */,
+				E0EF2D2221385004006B17F4 /* Bluetooth */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E0EF2D2121384FFC006B17F4 /* ViewViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0AFD4EF21C0641F006B6553 /* DashboardView */,
 				E0EF2D3221386173006B17F4 /* GPS Viewer */,
 				E0EF2D29213860CE006B17F4 /* Device Finder */,
 			);
-			path = MVVM;
+			path = ViewViewModel;
 			sourceTree = "<group>";
 		};
 		E0EF2D2221385004006B17F4 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				E0EF2D2321385155006B17F4 /* OSSDeviceManager.swift */,
 				E0EF2D25213851B0006B17F4 /* OSSOGatt */,
 			);
 			path = Bluetooth;
@@ -150,8 +278,9 @@
 		E0EF2D29213860CE006B17F4 /* Device Finder */ = {
 			isa = PBXGroup;
 			children = (
-				E0EF2D2C213860F0006B17F4 /* DeviceFinderViewController.swift */,
-				E0EF2D3021386110006B17F4 /* DeviceFinderViewModel.swift */,
+				E06CD5A621CFF89F00B96BD7 /* ViewController */,
+				E06CD5A421CFF88A00B96BD7 /* Views */,
+				E06CD5A521CFF89700B96BD7 /* ViewModel */,
 			);
 			path = "Device Finder";
 			sourceTree = "<group>";
@@ -159,8 +288,9 @@
 		E0EF2D3221386173006B17F4 /* GPS Viewer */ = {
 			isa = PBXGroup;
 			children = (
-				E0EF2D3321386195006B17F4 /* GPSViewerViewController.swift */,
-				E0EF2D35213861CF006B17F4 /* GPSViewerViewModel.swift */,
+				E06CD59521CBC32900B96BD7 /* ViewController */,
+				E06CD59621CBC33000B96BD7 /* ViewModel */,
+				E06CD59421CBC31500B96BD7 /* Views */,
 			);
 			path = "GPS Viewer";
 			sourceTree = "<group>";
@@ -185,7 +315,7 @@
 				E0B7B6ED212451B5007408A9 /* Sources */,
 				E0B7B6EE212451B5007408A9 /* Frameworks */,
 				E0B7B6EF212451B5007408A9 /* Resources */,
-				EED3370489424D6DBF367BE9 /* [CP] Embed Pods Frameworks */,
+				C68F58D4ADA4274F71ACD5F1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,6 +338,7 @@
 				TargetAttributes = {
 					E0B7B6F0212451B5007408A9 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -243,7 +374,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EED3370489424D6DBF367BE9 /* [CP] Embed Pods Frameworks */ = {
+		C68F58D4ADA4274F71ACD5F1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,14 +417,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0AFD4EE21C02DD6006B6553 /* OssoDeviceTableViewCell.swift in Sources */,
+				E0AFD4F321C06A1C006B6553 /* SensorTableViewCell.swift in Sources */,
+				E0AFD4F121C064EB006B6553 /* DashboardViewController.swift in Sources */,
+				E06CD5A921D3CD9000B96BD7 /* DashboardViewModel.swift in Sources */,
 				E0EF2D3421386195006B17F4 /* GPSViewerViewController.swift in Sources */,
 				E03D3603212AF23B00BBD42A /* OSSOUUIDs.swift in Sources */,
+				E0C635EC21C2EDBB00BE3BF0 /* MenuLevelController.swift in Sources */,
 				E0EF2D39213861EA006B17F4 /* SensorViewViewController.swift in Sources */,
 				E0B7B6F7212451B5007408A9 /* ViewController.swift in Sources */,
 				E0EF2D36213861CF006B17F4 /* GPSViewerViewModel.swift in Sources */,
 				E0EF2D3B213861F9006B17F4 /* SensorViewViewModel.swift in Sources */,
 				E0EF2D3121386110006B17F4 /* DeviceFinderViewModel.swift in Sources */,
 				E0EF2D2D213860F0006B17F4 /* DeviceFinderViewController.swift in Sources */,
+				E0B2E98C21C8057D007B5ADF /* OSSO.swift in Sources */,
 				E0EF2D2821385219006B17F4 /* Bindable.swift in Sources */,
 				E0B7B6F5212451B5007408A9 /* AppDelegate.swift in Sources */,
 				E0EF2D2421385155006B17F4 /* OSSDeviceManager.swift in Sources */,
@@ -452,7 +589,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = onceLabs.OSSO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -472,7 +609,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = onceLabs.OSSO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

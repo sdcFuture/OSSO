@@ -12,9 +12,6 @@ import Foundation
 import CoreBluetooth
 import JABLE
 
-let ossoGatt = OSSOGatt()
-
-
 struct TriAxis{
     var x: Float
     var y: Float
@@ -28,33 +25,33 @@ struct GpsCoordinate{
 
 class OSSOGatt: NSObject, GattProfile{
     
-    var ossoMotionService: CBService?
-    var ossoFreeFallCharacteristic: CBCharacteristic?
-    var ossoAccelerometerCharacteristic: CBCharacteristic?//notifications
+    var ossoMotionService               : CBService?
+    var ossoFreeFallCharacteristic      : CBCharacteristic?
+    var ossoAccelerometerCharacteristic : CBCharacteristic?//notifications
     
-    var ossoEnvironmentalService: CBService?
-    var ossoTemperatureCharacteristic: CBCharacteristic?
-    var ossoPressureCharacteristic: CBCharacteristic?
-    var ossoHumidityCharacteristic: CBCharacteristic?
-    var ossoIrTempCharacteristic: CBCharacteristic?
-    var ossoUvIndexCharacteristic: CBCharacteristic?
-    var ossoGpsCharacteristic: CBCharacteristic?
+    var ossoEnvironmentalService        : CBService?
+    var ossoTemperatureCharacteristic   : CBCharacteristic?
+    var ossoPressureCharacteristic      : CBCharacteristic?
+    var ossoHumidityCharacteristic      : CBCharacteristic?
+    var ossoIrTempCharacteristic        : CBCharacteristic?
+    var ossoUvIndexCharacteristic       : CBCharacteristic?
+    var ossoGpsCharacteristic           : CBCharacteristic?
+    var ossoBarkCharacteristic          : CBCharacteristic?
     
     var timer: Timer?
     
     /*  Bindable converted values */
-    var ossoFreeFallValue: Bindable<Float> = Bindable(0)
-    var ossoAccelValue: Bindable<TriAxis> = Bindable(TriAxis(x: 0, y: 0, z: 0))
-    var ossoGyroValue: Bindable<TriAxis> = Bindable(TriAxis(x: 0, y: 0, z: 0))
-    var ossoTempValue: Bindable<Float> = Bindable(0)
-    var ossoPressureValue: Bindable<Float> = Bindable(0)
-    var ossoIrTempValue: Bindable<Float> = Bindable(0)
-    var ossoUvIndexValue: Bindable<Float> = Bindable(0)
-    var ossoGpsValue: Bindable<GpsCoordinate> = Bindable(GpsCoordinate(latitude: 0, longtitude: 0))
-    var ossoHumidity: Bindable<Float> = Bindable(0)
-    
-    
-    var rawGps: Bindable<String> = Bindable("")
+    var ossoFreeFallValue       : Bindable<Float>         = Bindable(0)
+    var ossoAccelValue          : Bindable<TriAxis>       = Bindable(TriAxis(x: 0, y: 0, z: 0))
+    var ossoGyroValue           : Bindable<TriAxis>       = Bindable(TriAxis(x: 0, y: 0, z: 0))
+    var ossoTempValue           : Bindable<Float>         = Bindable(0)
+    var ossoBarkValue           : Bindable<Int>           = Bindable(0)
+    var ossoPressureValue       : Bindable<Float>         = Bindable(0)
+    var ossoIrTempValue         : Bindable<Float>         = Bindable(0)
+    var ossoUvIndexValue        : Bindable<Float>         = Bindable(0)
+    var ossoGpsValue            : Bindable<GpsCoordinate> = Bindable(GpsCoordinate(latitude: 0, longtitude: 0))
+    var ossoHumidity            : Bindable<Float>         = Bindable(0)
+    var rawGps                  : Bindable<String>        = Bindable("")
     
     var gattProfile: JABLE_GATT.JABLE_GATTProfile!
     
@@ -96,6 +93,12 @@ class OSSOGatt: NSObject, GattProfile{
                         ),
                         
                         JABLE_GATT.JABLE_Characteristic(
+                            characteristicUUID: OSSO_IR_TEMP_CHARACTERISTIC_UUID,
+                            whenFound: assignTo(&ossoIrTempCharacteristic),
+                            descriptors: nil
+                        ),
+                        
+                        JABLE_GATT.JABLE_Characteristic(
                             characteristicUUID: OSSO_PRESSURE_CHARACTERISTIC_UUID,
                             whenFound: assignTo(&ossoPressureCharacteristic),
                             descriptors: nil
@@ -110,6 +113,12 @@ class OSSOGatt: NSObject, GattProfile{
                         JABLE_GATT.JABLE_Characteristic(
                             characteristicUUID: OSSO_UV_INDEX_CHARACTERISTIC_UUID,
                             whenFound: assignTo(&ossoUvIndexCharacteristic),
+                            descriptors: nil
+                        ),
+                        
+                        JABLE_GATT.JABLE_Characteristic(
+                            characteristicUUID: OSSO_BARK_CHARACTERISTIC_UUID,
+                            whenFound: assignTo(&ossoBarkCharacteristic),
                             descriptors: nil
                         ),
                         
