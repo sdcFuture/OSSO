@@ -11,23 +11,28 @@ import MapKit
 
 class GPSViewerViewController: UIViewController {
     
-    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var gpsTextLog: UITextView!
-    
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var coordinateLabelContainer: UIView!
+    @IBOutlet weak var centerMapButton: UIButton!
     
+    let myAnnotation: MKPointAnnotation = MKPointAnnotation()
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
+    var ossoLocation: CLLocation?
     var locationSet = false
+    var ossoLocationSet = false
     let regionRadius: CLLocationDistance = 25000
     let initialLocation = CLLocation(latitude: 40.8205638, longitude: -91.1407439)
+    
+    let focusButton = UIButton();
     
     var viewModel: GPSViewerViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        centerMapButton.layer.cornerRadius = 25
         viewModel = GPSViewerViewModel()
         mapView.showsCompass = true
         mapView.showsScale = true
@@ -49,13 +54,25 @@ class GPSViewerViewController: UIViewController {
         }
         
         self.navigationController?.navigationBar.topItem?.title = "Location"
-        
         setupBindings()
+    }
+    
+    @IBAction func reCenterButtonPressed(_ sender: UIButton) {
+        
+        if let location = ossoLocation{
+            self.centerMapOnLocation(location: location)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         self.navigationController?.navigationBar.topItem?.title = "Location"
+        locationSet = false
+        ossoLocationSet = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     func setupBindings(){
@@ -65,21 +82,26 @@ class GPSViewerViewController: UIViewController {
             //guard let location = newLocation else { self.gpsTextLog.text = self.gpsTextLog.text + "bad location"; return }
             if let newlat = newLocation?.latitude, let newLon = newLocation?.longitude{
                 let validLocation = CLLocation(latitude: newlat, longitude: newLon)
-                self.centerMapOnLocation(location: validLocation)
+                if !self.ossoLocationSet {
+                    self.ossoLocationSet = true
+                    self.centerMapOnLocation(location: validLocation)
+                }
+
+                self.ossoLocation = validLocation
+                self.coordinateLabel.text = "Lon: \(newLon), Lat: \(newlat)"
+                self.myAnnotation.coordinate = CLLocationCoordinate2DMake(newlat, newLon);
+                self.myAnnotation.title = "Current location"
+                self.mapView.addAnnotation(self.myAnnotation)
             }
             else {
                 let validLocation = CLLocation(latitude: 0, longitude: 0)
-                self.centerMapOnLocation(location: validLocation)
+                //self.centerMapOnLocation(location: validLocation)
+//                let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+//                myAnnotation.coordinate = CLLocationCoordinate2DMake(newLocation.latitude, newLocation.longitude);
+//                myAnnotation.title = "Current location"
+//                self.mapView.addAnnotation(myAnnotation)
             }
-            
-        
-            //print("New Location: \(newLocation)")
         }
-        
-//        ossoGatt.rawGps.bind { (newGps) in
-//            //self.gpsTextLog.text = "\n" + self.gpsTextLog.text + " RAW DATA: " + newGps
-//        }
-//
     }
 
 

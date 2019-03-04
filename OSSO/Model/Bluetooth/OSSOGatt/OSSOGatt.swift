@@ -195,107 +195,107 @@ extension OSSOGatt{
 
 
 extension OSSOGatt{
-    
-    func newValue(forCharacteristic characteristic: CBCharacteristic, value: Data){
-        
-        switch characteristic.uuid{
-        case OSSO_FREE_FALL_CHARACTERISTIC_UUID: //FREE FALL?
-            
-            let dataArray = getDataBytes(characteristic: characteristic)
-            print("New Free Fall Data: \(dataArray)")
-
-        case OSSO_ACCELERATION_CHARACTERISTIC_UUID://notifications - accel, gyro?
-
-            let dataArray = getDataBytes(characteristic: characteristic)
-            print("New Acceleration Data: \(dataArray)")
-            
-            let xValue: Int16 = (Int16(dataArray[5]) << 8) | Int16(dataArray[4])
-            let yValue: Int16 = (Int16(dataArray[3]) << 8) | Int16(dataArray[2])
-            let zValue: Int16 = (Int16(dataArray[1]) << 8) | Int16(dataArray[0])
-            //self.ossoTempValue.value = Float(newTemperature)/10
-            self.ossoAccelValue.value = TriAxis(x: Float(xValue), y: Float(yValue), z: Float(zValue))
-            print("Acceleration = \(ossoAccelValue.value)")
-
-        case OSSO_TEMPERATURE_CHARACTERISTIC_UUID://READ ONLY - temp?
-
-            let dataArray = getDataBytes(characteristic: characteristic)
-
-            let newTemperature: UInt16 = (UInt16(dataArray[1]) << 8) | UInt16(dataArray[0])
-            self.ossoTempValue.value = Float(newTemperature)/10
-            print("New Temperature value = \(ossoTempValue.value)")
-            
-        case OSSO_PRESSURE_CHARACTERISTIC_UUID://READ ONLY - humidity?
-
-            let dataArray = getDataBytes(characteristic: characteristic)
-            print("New Pressure Data: \(dataArray)")
-            
-            
-            //convert Data to decimal value, this won't make sense in a lot of cases
-            let convertedData = Data(bytes: UnsafePointer<UInt8>(dataArray), count: dataArray.count);
-            var convertedToDecimal: Int64 = 0;
-            
-            (convertedData as NSData).getBytes(&convertedToDecimal, length: dataArray.count)
-            var decimalValue = convertedToDecimal
-            
-            self.ossoPressureValue.value = Float(decimalValue)/100
-            print("New Pressure value = \(ossoPressureValue.value)")
-            
-        case OSSO_HUMIDITY_CHARACTERISTIC_UUID:
-
-            
-            let dataArray = getDataBytes(characteristic: characteristic)
-            
-            let newHumidity: UInt16 = (UInt16(dataArray[1]) << 8) | UInt16(dataArray[0])
-            self.ossoHumidity.value = Float(newHumidity)/10
-            print("New Humidity value = \(ossoHumidity.value)")
-            
-            
-            //let dataArray = getDataBytes(characteristic: characteristic)
-            //let stringData = getHexString(characteristic: characteristic)
-            //self.ossoHumidity.value = stringData
-            //print("New Humidity Data: \(dataArray)")
-
-        case OSSO_IR_TEMP_CHARACTERISTIC_UUID:
-            
-            let dataArray = getDataBytes(characteristic: characteristic)
-            print("New IR Temp Data: \(dataArray)")
-
-        case OSSO_UV_INDEX_CHARACTERISTIC_UUID:
-            print("New UV Index Data: \(value)")
-            
-            
-        case OSSO_GPS_CHARACTERISTIC_UUID:
-            
-            print("New GPS Data: \(value)")
-            let dataArray = getDataBytes(characteristic: characteristic)
-            self.rawGps.value = getHexString(characteristic: characteristic)
-            
-            let latitude: Int16 = (Int16(dataArray[11]) << 8) | Int16(dataArray[10])
-            let latFractional = Double((UInt32(dataArray[9]) << 24) | (UInt32(dataArray[8]) << 16) | (UInt32(dataArray[7]) << 8) | UInt32(dataArray[6]))/10000
-            var fullLat: Double
-            if latitude < 0{
-                fullLat = Double(latitude) - latFractional
-            }
-            else {
-                fullLat = Double(latitude) + latFractional
-            }
-            
-            let longitude: Int16 = (Int16(dataArray[5]) << 8) | Int16(dataArray[4])
-            let lonFractional = Double( (UInt32(dataArray[3]) << 24) | (UInt32(dataArray[2]) << 16) | (UInt32(dataArray[1]) << 8) | UInt32(dataArray[0]))/10000
-            var fullLon: Double
-            if longitude < 0{
-                fullLon = Double(longitude) - lonFractional
-            }
-            else {
-                fullLon = Double(longitude) + lonFractional
-            }
-            
-            self.ossoGpsValue.value = GpsCoordinate(latitude: fullLat, longtitude: fullLon)
-            
-        default:
-        print("no match")
-        }
-    }
+//
+//    func newValue(forCharacteristic characteristic: CBCharacteristic, value: Data){
+//
+//        switch characteristic.uuid{
+//        case OSSO_FREE_FALL_CHARACTERISTIC_UUID: //FREE FALL?
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//            //print("New Free Fall Data: \(dataArray)")
+//
+//        case OSSO_ACCELERATION_CHARACTERISTIC_UUID://notifications - accel, gyro?
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//            //print("New Acceleration Data: \(dataArray)")
+//
+//            let xValue: Int16 = (Int16(dataArray[5]) << 8) | Int16(dataArray[4])
+//            let yValue: Int16 = (Int16(dataArray[3]) << 8) | Int16(dataArray[2])
+//            let zValue: Int16 = (Int16(dataArray[1]) << 8) | Int16(dataArray[0])
+//            //self.ossoTempValue.value = Float(newTemperature)/10
+//            self.ossoAccelValue.value = TriAxis(x: Float(xValue), y: Float(yValue), z: Float(zValue))
+//            //print("Acceleration = \(ossoAccelValue.value)")
+//
+//        case OSSO_TEMPERATURE_CHARACTERISTIC_UUID://READ ONLY - temp?
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//
+//            let newTemperature: UInt16 = (UInt16(dataArray[1]) << 8) | UInt16(dataArray[0])
+//            self.ossoTempValue.value = Float(newTemperature)/10
+//            //print("New Temperature value = \(ossoTempValue.value)")
+//
+//        case OSSO_PRESSURE_CHARACTERISTIC_UUID://READ ONLY - humidity?
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//            //print("New Pressure Data: \(dataArray)")
+//
+//
+//            //convert Data to decimal value, this won't make sense in a lot of cases
+//            let convertedData = Data(bytes: UnsafePointer<UInt8>(dataArray), count: dataArray.count);
+//            var convertedToDecimal: Int64 = 0;
+//
+//            (convertedData as NSData).getBytes(&convertedToDecimal, length: dataArray.count)
+//            var decimalValue = convertedToDecimal
+//
+//            self.ossoPressureValue.value = Float(decimalValue)/100
+//            //print("New Pressure value = \(ossoPressureValue.value)")
+//
+//        case OSSO_HUMIDITY_CHARACTERISTIC_UUID:
+//
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//
+//            let newHumidity: UInt16 = (UInt16(dataArray[1]) << 8) | UInt16(dataArray[0])
+//            self.ossoHumidity.value = Float(newHumidity)/10
+//            //print("New Humidity value = \(ossoHumidity.value)")
+//
+//
+//            //let dataArray = getDataBytes(characteristic: characteristic)
+//            //let stringData = getHexString(characteristic: characteristic)
+//            //self.ossoHumidity.value = stringData
+//            //print("New Humidity Data: \(dataArray)")
+//
+//        case OSSO_IR_TEMP_CHARACTERISTIC_UUID:
+//
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//            //print("New IR Temp Data: \(dataArray)")
+//
+//        case OSSO_UV_INDEX_CHARACTERISTIC_UUID:
+//            print("New UV Index Data: \(value)")
+//
+//
+//        case OSSO_GPS_CHARACTERISTIC_UUID:
+//
+//            print("New GPS Data: \(value)")
+//            let dataArray = getDataBytes(characteristic: characteristic)
+//            self.rawGps.value = getHexString(characteristic: characteristic)
+//
+//            let latitude: Int16 = (Int16(dataArray[11]) << 8) | Int16(dataArray[10])
+//            let latFractional = Double((UInt32(dataArray[9]) << 24) | (UInt32(dataArray[8]) << 16) | (UInt32(dataArray[7]) << 8) | UInt32(dataArray[6]))/10000
+//            var fullLat: Double
+//            if latitude < 0{
+//                fullLat = Double(latitude) - latFractional
+//            }
+//            else {
+//                fullLat = Double(latitude) + latFractional
+//            }
+//
+//            let longitude: Int16 = (Int16(dataArray[5]) << 8) | Int16(dataArray[4])
+//            let lonFractional = Double( (UInt32(dataArray[3]) << 24) | (UInt32(dataArray[2]) << 16) | (UInt32(dataArray[1]) << 8) | UInt32(dataArray[0]))/10000
+//            var fullLon: Double
+//            if longitude < 0{
+//                fullLon = Double(longitude) - lonFractional
+//            }
+//            else {
+//                fullLon = Double(longitude) + lonFractional
+//            }
+//
+//            self.ossoGpsValue.value = GpsCoordinate(latitude: fullLat, longtitude: fullLon)
+//
+//        default:
+//        print("no match")
+//        }
+//    }
 }
 
 extension OSSOGatt{

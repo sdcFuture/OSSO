@@ -22,7 +22,7 @@ class GPSViewerViewModel: NSObject{
         print("Set ViewModelGPS Bindings")
         ossoDeviceManager.connectedOSSO?.ossoGpsValue.bind{ [weak self] (newCoordinate) in
             
-            //print("ViewModel updated location")
+            print("ViewModel updated location \(newCoordinate)")
             self?.cllocation.value = CLLocationCoordinate2D(latitude: newCoordinate.latitude, longitude: newCoordinate.longtitude)
         }
     }

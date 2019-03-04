@@ -32,7 +32,7 @@ class DashboardViewModel: NSObject{
         
         osso.ossoUvIndexValue.bind{ (uvIndex) in
             self.uvIndex.value = uvIndex
-            print("DashboardViewModel :: New UV Index \(uvIndex)")
+            //print("DashboardViewModel :: New UV Index \(uvIndex)")
         }
         
         osso.ossoBatteryLow.bind{ (batteryStatus) in
@@ -41,7 +41,7 @@ class DashboardViewModel: NSObject{
         
         osso.ossoSunExposureTime.bind{ (exposureTime) in
             self.uvExposure.value = exposureTime
-            print("DashboardViewModel :: New Exposure Time \(exposureTime)")
+            //print("DashboardViewModel :: New Exposure Time \(exposureTime)")
         }
         
         osso.ossoStepsValue.bind{ (steps) in
@@ -55,7 +55,7 @@ class DashboardViewModel: NSObject{
         
         osso.ossoIrTempValue.bind{ (newIRTemp) in
             self.irTemperature.value = newIRTemp
-            print("DashboardViewModel :: New IR Temp \(newIRTemp)")
+            //print("DashboardViewModel :: New IR Temp \(newIRTemp)")
         }
         
         osso.ossoUvIndexValue.bind{ (newUVIndex) in
@@ -65,12 +65,12 @@ class DashboardViewModel: NSObject{
         
         osso.ossoHumidity.bind{ (newHumidity) in
             self.humidity.value = newHumidity
-            print("DashboardViewModel :: New Humidity \(newHumidity)")
+            //print("DashboardViewModel :: New Humidity \(newHumidity)")
         }
         
         osso.ossoBarksValue.bind{ (numberOfBarks) in
             self.barks.value = numberOfBarks
-            print("DashboardViewModel :: New barks value \(numberOfBarks)")
+            //print("DashboardViewModel :: New barks value \(numberOfBarks)")
         }
         
     }

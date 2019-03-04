@@ -179,18 +179,28 @@ class SensorTableViewCell: UITableViewCell {
         
         iconImageView.frame = CGRect(
             origin: CGPoint(
-                x: iconOutlineSquare.bounds.origin.x + iconOutlineSquare.bounds.width*0.1/2,
-                y: iconOutlineSquare.bounds.origin.y + iconOutlineSquare.bounds.height*0.1/2),
+                x: contentView.bounds.height*0.15/2,
+                y: contentView.bounds.height*0.25 + contentView.bounds.height*0.15/2),
             size: CGSize(
-                width: iconOutlineSquare.bounds.width*0.9,
-                height: iconOutlineSquare.bounds.height*0.9))
+                width: contentView.bounds.height*0.65,
+                height: contentView.bounds.height*0.6))
+            
+            
+            
+//            CGRect(
+//            origin: CGPoint(
+//                x: iconOutlineSquare.bounds.origin.x + iconOutlineSquare.bounds.width*0.1/2,
+//                y: iconOutlineSquare.bounds.origin.y + iconOutlineSquare.bounds.height*0.1/2),
+//            size: CGSize(
+//                width: iconOutlineSquare.bounds.width*0.9,
+//                height: iconOutlineSquare.bounds.height*0.9))
         
         iconRect.path = iconOutlineSquare.cgPath
         iconRect.fillColor = UIColor.clear.cgColor
         iconRect.strokeColor = UIColor.black.cgColor
         iconRect.borderColor = UIColor.black.cgColor
         iconRect.borderWidth = 1
-        self.contentView.layer.addSublayer(iconRect)
+        //self.contentView.layer.addSublayer(iconRect)
         
         /*  Add horizontal separation lines */
         let separaterLinePath = UIBezierPath()

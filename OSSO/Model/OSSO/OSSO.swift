@@ -31,6 +31,7 @@ class OSSO: NSObject{
     
     var gattProfile: OSSOGatt?
     var associatedPeripheral: CBPeripheral!
+    var firmwareVersion: Int = 0
     
     private var updateTimer: Timer?
     
@@ -155,6 +156,8 @@ extension OSSO{
             else{
                 self.ossoBatteryLow.value = true
             }
+            
+            self.firmwareVersion = Int(dataArray[1])
             print("New Battery value = \(dataArray)")
             
         case OSSO_HUMIDITY_CHARACTERISTIC_UUID:

@@ -60,7 +60,7 @@ class OssoDeviceTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.white
         self.iconImageView.contentMode = .scaleAspectFit
-        self.iconImageView.image = UIImage(imageLiteralResourceName: "DogPlaceHolder")
+        self.iconImageView.image = UIImage(imageLiteralResourceName: "MediumDog")
         self.contentView.backgroundColor = UIColor.white
         self.contentView.layer.shadowColor           = UIColor.darkGray.cgColor
         self.contentView.layer.shadowOffset          = CGSize(width: 1, height: 2)
@@ -99,11 +99,11 @@ class OssoDeviceTableViewCell: UITableViewCell {
         
         iconImageView.frame = CGRect(
             origin: CGPoint(
-                x: 0,
-                y: 0),
+                x: contentView.bounds.height*0.1,
+                y: contentView.bounds.height*0.1),
             size: CGSize(
-                width: contentView.bounds.width*0.175,
-                height: (contentView.bounds.width*0.175)))
+                width: contentView.bounds.height*0.8,
+                height: (contentView.bounds.height*0.8)))
         
         deviceIdLabel.frame = CGRect(
             origin: CGPoint(
