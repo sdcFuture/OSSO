@@ -94,7 +94,7 @@ class OSSO: NSObject{
     }
     
     
-    func readValuesBecauseSimonIsDumb(){
+    func readValues(){
         
         guard let gatt = gattProfile else { return }
         //print("Read GPS")
