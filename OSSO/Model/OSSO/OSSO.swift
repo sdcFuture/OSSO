@@ -85,7 +85,7 @@ class OSSO: NSObject{
         }
         
         updateTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-            self.readValuesBecauseSimonIsDumb()
+            self.readValues()
         }
     }
     
