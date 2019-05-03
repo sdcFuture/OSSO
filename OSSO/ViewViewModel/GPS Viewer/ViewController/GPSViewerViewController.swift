@@ -3,7 +3,7 @@
 //  OSSO
 //
 //  Created by Joe Bakalor on 8/30/18.
-//  Copyright © 2018 Joe Bakalor. All rights reserved.
+//  Copyright © 2019 SDC Future Electronics. All rights reserved.
 //
 
 import UIKit
@@ -16,6 +16,12 @@ class GPSViewerViewController: UIViewController {
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var coordinateLabelContainer: UIView!
     @IBOutlet weak var centerMapButton: UIButton!
+    @IBOutlet weak var privacyButton: UIButton!
+    
+    @IBAction func openPrivacyPolicy(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://www.futureelectronics.com/policies/privacy-policy/")! as URL, options: [:], completionHandler:nil)
+        self.privacyButton.isHidden = true
+    }
     
     let myAnnotation: MKPointAnnotation = MKPointAnnotation()
     var locationManager: CLLocationManager!
@@ -32,6 +38,7 @@ class GPSViewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        privacyButton.layer.cornerRadius = 5
         centerMapButton.layer.cornerRadius = 25
         viewModel = GPSViewerViewModel()
         mapView.showsCompass = true

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SW6-Lg-48k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SW6-Lg-48k">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,7 +53,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keE-OC-0xc">
-                                <rect key="frame" x="20" y="655.33333333333337" width="335" height="44.666666666666629"/>
+                                <rect key="frame" x="20" y="641.33333333333337" width="335" height="44.666666666666629"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujQ-4Q-KYt">
                                         <rect key="frame" x="8" y="8.0000000000000018" width="319" height="28.666666666666671"/>
@@ -94,6 +94,17 @@
                                     <action selector="reCenterButtonPressed:" destination="yly-ym-U0R" eventType="touchUpInside" id="hn5-8V-Hzz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXa-W8-g3q">
+                                <rect key="frame" x="20" y="691" width="335" height="33"/>
+                                <color key="backgroundColor" red="0.70786182683257537" green="0.22996380081399725" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Privacy Policy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="openPrivacyPolicy:" destination="yly-ym-U0R" eventType="touchUpInside" id="O3J-7z-lc2"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mrJ-Tf-OWg">
                                 <rect key="frame" x="16" y="132" width="343" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -106,11 +117,14 @@
                             <constraint firstItem="Cfe-el-Kx5" firstAttribute="top" secondItem="M1Y-f1-BIZ" secondAttribute="top" constant="14" id="6NI-g6-43o"/>
                             <constraint firstItem="39T-VX-srT" firstAttribute="top" secondItem="M1Y-f1-BIZ" secondAttribute="top" id="BJp-Zl-r6g"/>
                             <constraint firstItem="mrJ-Tf-OWg" firstAttribute="top" secondItem="M1Y-f1-BIZ" secondAttribute="top" constant="112" id="CjK-UM-ttg"/>
-                            <constraint firstItem="M1Y-f1-BIZ" firstAttribute="bottom" secondItem="keE-OC-0xc" secondAttribute="bottom" constant="29" id="EyG-Yz-bHs"/>
+                            <constraint firstItem="M1Y-f1-BIZ" firstAttribute="bottom" secondItem="keE-OC-0xc" secondAttribute="bottom" constant="43" id="EyG-Yz-bHs"/>
                             <constraint firstItem="39T-VX-srT" firstAttribute="leading" secondItem="M1Y-f1-BIZ" secondAttribute="leading" id="IYs-8Q-lmn"/>
                             <constraint firstItem="39T-VX-srT" firstAttribute="bottom" secondItem="M1Y-f1-BIZ" secondAttribute="bottom" id="Lm9-MU-MBb"/>
+                            <constraint firstItem="ZXa-W8-g3q" firstAttribute="top" secondItem="keE-OC-0xc" secondAttribute="bottom" constant="5" id="Nbb-Qp-toZ"/>
+                            <constraint firstItem="M1Y-f1-BIZ" firstAttribute="trailing" secondItem="ZXa-W8-g3q" secondAttribute="trailing" constant="20" id="PwE-1E-HnG"/>
                             <constraint firstItem="39T-VX-srT" firstAttribute="trailing" secondItem="M1Y-f1-BIZ" secondAttribute="trailing" id="QLZ-JN-9yw"/>
                             <constraint firstItem="M1Y-f1-BIZ" firstAttribute="trailing" secondItem="keE-OC-0xc" secondAttribute="trailing" constant="20" id="RqM-d8-nvj"/>
+                            <constraint firstItem="ZXa-W8-g3q" firstAttribute="leading" secondItem="M1Y-f1-BIZ" secondAttribute="leading" constant="20" id="TcW-95-Kqd"/>
                             <constraint firstItem="keE-OC-0xc" firstAttribute="leading" secondItem="M1Y-f1-BIZ" secondAttribute="leading" constant="20" id="jci-lf-eIE"/>
                             <constraint firstItem="mrJ-Tf-OWg" firstAttribute="leading" secondItem="M1Y-f1-BIZ" secondAttribute="leading" constant="16" id="mkZ-CX-tZe"/>
                             <constraint firstItem="M1Y-f1-BIZ" firstAttribute="trailing" secondItem="mrJ-Tf-OWg" secondAttribute="trailing" constant="16" id="qYf-ZN-22G"/>
@@ -133,11 +147,12 @@
                         <outlet property="coordinateLabelContainer" destination="keE-OC-0xc" id="JDj-ic-vhk"/>
                         <outlet property="gpsTextLog" destination="mrJ-Tf-OWg" id="eYT-tF-rUf"/>
                         <outlet property="mapView" destination="39T-VX-srT" id="yQZ-Ln-x2K"/>
+                        <outlet property="privacyButton" destination="ZXa-W8-g3q" id="6Ey-dS-3xK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPz-ds-S3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2215.9420289855075" y="432.06521739130437"/>
+            <point key="canvasLocation" x="2215.1999999999998" y="431.5270935960591"/>
         </scene>
         <!--Sensors-->
         <scene sceneID="Lt3-WO-Pse">

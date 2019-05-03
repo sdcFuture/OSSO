@@ -3,7 +3,7 @@
 //  Teknest
 //
 //  Created by Joe Bakalor on 4/26/18.
-//  Copyright © 2018 Joe Bakalor. All rights reserved.
+//  Copyright © 2019 SDC Future Electronics. All rights reserved.
 //
 
 import Foundation

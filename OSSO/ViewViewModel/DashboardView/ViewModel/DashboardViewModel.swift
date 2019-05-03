@@ -3,7 +3,7 @@
 //  OSSO
 //
 //  Created by Joe Bakalor on 12/26/18.
-//  Copyright © 2018 Joe Bakalor. All rights reserved.
+//  Copyright © 2019 SDC Future Electronics. All rights reserved.
 //
 
 import Foundation
