@@ -85,11 +85,11 @@ class OssoDeviceTableViewCell: UITableViewCell {
 
         rssiValue.frame = CGRect(
             origin: CGPoint(
-                x: self.contentView.bounds.width*0.825,
+                x: self.contentView.bounds.width*0.725,
                 y: 0),
             size: CGSize(
-                width: contentView.bounds.width*0.175,
-                height: (contentView.bounds.width*0.175)))
+                width: contentView.bounds.width*0.20,
+                height: (self.bounds.height*0.8)))
         
         //rssiValue.text = "-98"
         rssiValue.textAlignment = .center
@@ -102,7 +102,8 @@ class OssoDeviceTableViewCell: UITableViewCell {
                 x: contentView.bounds.height*0.1,
                 y: contentView.bounds.height*0.1),
             size: CGSize(
-                width: contentView.bounds.height*0.8,
+                //width: contentView.bounds.height*0.8,
+                width: contentView.bounds.height*0.7,
                 height: (contentView.bounds.height*0.8)))
         
         deviceIdLabel.frame = CGRect(
@@ -137,10 +138,10 @@ class OssoDeviceTableViewCell: UITableViewCell {
         
         /*  Add right line */
         separaterLinePath.move(to: CGPoint(
-            x: self.contentView.bounds.width*0.825,
+            x: self.contentView.bounds.width*0.725,
             y: 0))
         separaterLinePath.addLine(to: CGPoint(
-            x: self.contentView.bounds.width*0.825,
+            x: self.contentView.bounds.width*0.725,
             y: self.contentView.bounds.height))
 
         lineSeparatorLayer.path = separaterLinePath.cgPath

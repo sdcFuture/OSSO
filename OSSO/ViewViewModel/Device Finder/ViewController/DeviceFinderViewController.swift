@@ -58,10 +58,10 @@ extension DeviceFinderViewController: UITableViewDelegate{
         if debug{
             
             //SETUP TRANSISTION TO TAB VIEW CONTROLLER
-            let transistion = CATransition()
-            transistion.type    = CATransitionType.reveal
+            //let transistion = CATransition()
+            //transistion.type    = CATransitionType.reveal
             //transistion.subtype = CATransitionSubtype.fromBottom//CATransitionType.reveal
-            self.view.window!.layer.add(transistion, forKey: kCATransition)
+            //self.view.window!.layer.add(transistion, forKey: kCATransition)
             let newView = self.storyboard?.instantiateViewController(withIdentifier: "tabViewController") as! UITabBarController
             
             //TRANSISTION TO TABVIEW CONTROLLER
@@ -94,7 +94,7 @@ extension DeviceFinderViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if debug{
-            return 5
+            return 1
         } else {
             return tableData.count
         }
@@ -102,10 +102,11 @@ extension DeviceFinderViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = OssoDeviceTableViewCell()//UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.cellData = (rssi: tableData[indexPath.row].lastRSSI, index: indexPath.row)
         if debug {
+            cell.cellData = (rssi: -50, index: 0)
             //cell.textLabel?.text = "Test Device"
         } else {
+            cell.cellData = (rssi: tableData[indexPath.row].lastRSSI, index: indexPath.row)
             //cell.textLabel?.text = discoveredDevicesCopy[indexPath.row].advData.localName
         }
 
